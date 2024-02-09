@@ -2,9 +2,15 @@
 
 This script will pull the five most recent questions from StackOverflow and give the user the ability to choose a question. The answers to that question will then be shown, and the user can select the one they think was marked as correct.
 
+## Hosted URL
+
+You can access a hosted version of this script at: [https://cduff123.pythonanywhere.com/](https://cduff123.pythonanywhere.com/)  
+Note that this URL will need to be recreated every 30 days.
+
 ## TODOs: 
 - Fix caching to reduce API calls
 - Better error handling
+- Separate CSS
 - Nicer UI
 
 ### Local Install Instructions:
