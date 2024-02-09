@@ -1,6 +1,6 @@
 # getStackOverflow
 
-This script will pull the five most recent questions from StackOverflow and give the user the ability to choose a question. The answers to that question will then be shown, and the user can select the one they think was marked as correct.
+This script will pull the five most recent questions from StackOverflow and give the user the ability to choose a question. The answers to that question will then be shown and the user can select the one they think was marked as correct. The user will be shown if they are correct.
 
 ## Hosted URL
 
