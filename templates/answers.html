@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Answers</title>
+</head>
+<body>
+    <h1>Answers</h1>
+    <form action="/check_answer" method="post">
+        {% for answer in answers %}
+            <div>
+                <input type="radio" name="selected_answer" value="{{ answer.body }}" required>
+                <label>{{ answer.body }}</label>
+            </div>
+        {% endfor %}
+        <input type="hidden" name="correct_answer" value="{{ answers[0].body }}">
+        <button type="submit">Check Answer</button>
+    </form>
+</body>
+</html>
