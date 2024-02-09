@@ -39,19 +39,88 @@
         button:hover {
             background-color: #0056b3;
         }
+		.question-container {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .answer-container {
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+		.result-message {
+			
+			font-weight: bold;
+			font-size: 20px;
+		}
+		 .correct {
+            background-color: #d4edda;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <h1>Answers</h1>
-    <form action="/check_answer" method="post">
-        {% for answer in answers %}
-            <div>
-                <input type="radio" name="selected_answer" value="{{ answer.body }}" required>
-                <label>{{ answer.body }}</label>
-            </div>
-        {% endfor %}
-        <input type="hidden" name="correct_answer" value="{{ answers[0].body }}">
-        <button type="submit">Check Answer</button>
-    </form>
+    <div class="container">
+        <h1>Question</h1>
+		<p>You chose this question:</p>
+        <div class="question-container">
+			<code>{{ question.body | safe }}</code>
+        </div>
+        <h1>Answers</h1>
+		<p>Which answer was marked as correct?</p>
+        <div id="answers-container"></div>
+        <form id="answer-form">
+            {% for answer in answers %}
+                <div class="answer-container">
+                    <input type="radio" name="selected_answer_id" value="{{ answer.answer_id }}" required>
+                    <label>Answer_ID ({{ answer.answer_id }}): <br><code> {{ answer.body }} </code></label>
+                </div>
+            {% endfor %}
+			<br>
+			<div id="result-message" class="result-message" ></div>
+            <input type="hidden" name="correct_answer_id" value="{{ question.correct_answer_id }}">
+			<br>
+            <button type="button" onclick="checkAnswer()">Check Answer</button>
+        </form>
+        <button onclick="goToHome()">Go to Home</button>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            var formData = new FormData(document.getElementById("answer-form"));
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = xhr.responseText;
+                        document.getElementById("result-message").innerHTML = response;
+						if (response.includes("Correct")) {
+							document.getElementById("result-message").style.color = "green";
+						} else {
+							document.getElementById("result-message").style.color = "red";
+						}
+                    } else {
+                        console.error('Request failed: ' + xhr.status);
+                    }
+                }
+            };
+            xhr.open('POST', '/check_answer', true);
+            xhr.send(formData);
+        }
+
+        function goToHome() {
+            window.location.href = "/";
+        }
+    </script>
 </body>
 </html>

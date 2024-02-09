@@ -26,12 +26,36 @@
             line-height: 1.5;
             color: #666;
         }
+        li {
+			list-style-type: decimal;
+            margin-bottom: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Stack Overflow Guessing Game</h1>
 		<p>Select a question to view all potential answers and then choose the answer you think was marked as correct.</p>
+		<br>
+        <il>
+            {% for question in questions %}
+                <li>
+                    <a href="/answers/{{ question.question_id }}">{{ question.title }}</a>
+                </li>
+            {% endfor %}
+        </il>
     </div>
 </body>
 </html>
