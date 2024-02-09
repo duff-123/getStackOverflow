@@ -1,15 +1,3 @@
-# 2024-02-09 Christian Duff
-# This script will pull the five most recent
-#   questions from StackOverflow and give the user
-#   the ability to choose a question. The answers to that
-#   question will then be shown and the user can select the
-#   one they think was marked as correct.
-
-# TODOs: 
-#   Fix caching to reduce API calls
-#   Better error handling
-#   Nicer UI
-
 from flask import Flask, render_template, request
 #from flask_caching import Cache
 import requests, random
